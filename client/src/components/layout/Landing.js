@@ -40,7 +40,7 @@ class Landing extends Component {
     async getLatestHikes() {
         try {
             // let response = await axios.get('/api/hikes/all'); /* This only uses hardcoded test data */
-            let response = await axios.get('/api/hikes'); /* This uses real data from MongoDB */
+            let response = await axios.get('/api/hikes/all'); /* This uses real data from MongoDB */
             this.setState({ hikes: response.data });
             console.log('getLatestHikes API :point_right: Returned data:', response.data);
         } catch (e) {
