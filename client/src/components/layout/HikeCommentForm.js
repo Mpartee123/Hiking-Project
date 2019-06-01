@@ -10,7 +10,7 @@ class HikeCommentForm extends React.Component {
         // Don't call this.setState() here!
         this.state = {
             comment: "",
-            hikeId: this.props.hikeId
+            // hikeId: this.props.hikeId
         };
         console.log(`Hike Form constructor this.state = %o`,this.state);
         this.handleCommentChange = this.handleCommentChange.bind(this);
@@ -18,7 +18,7 @@ class HikeCommentForm extends React.Component {
     }
 
     handleCommentChange(event) {
-        console.log(`in handleCommentChange with event = %o`,event)
+        // console.log(`in handleCommentChange with event = %o`,event)
         this.setState({comment: event.target.value})
     }
 
@@ -27,7 +27,7 @@ class HikeCommentForm extends React.Component {
         console.log("sanity test");
         e.preventDefault();
         const commentData = {
-            hikeId: this.state.hikeId,
+            hikeId: this.props.hikeId,
             comment: this.state.comment
         };
         // {
@@ -38,6 +38,7 @@ class HikeCommentForm extends React.Component {
         try {
             const response = await axios.post('/api/hikes/comment', commentData);
             console.log(':point_right: Returned data:', response);
+            this.props.onNew(response.data);
 
             // You should probably use a callback to the parent function to update the comments, or maybe this functionality should be lifted up the HikeDetail level ( the api s
 
@@ -56,11 +57,16 @@ class HikeCommentForm extends React.Component {
                 {/*    <input type="text" name="comment" />*/}
                 {/*    <input type="submit" value="Submit" />*/}
                 {/*</form>*/}
-                <div className="row">
-                    <form className="col s12" onSubmit={this.onSubmit}>
-                        <div className="row">
+                {/*<div className="row">*/}
+                {/*    <form className="col s12" onSubmit={this.onSubmit}>*/}
+                    <form className="" onSubmit={this.onSubmit}>
+                        <div className="">
+                        {/*<div className="row">*/}
+                            <p><b>Submit Comment for Hike ID:</b> {this.props.hikeId}</p>
                             <div style={{"backgroundColor": "white"}} className="input-field col s12">
-                                <input placeholder="Comment..." id="comment" type="text" className="validate" onChange={this.handleCommentChange}/>
+
+                                {/*<input placeholder="Comment..." id="comment" type="text" className="validate" onChange={this.handleCommentChange}/>*/}
+                                <input placeholder="" id="comment" type="text" className="validate" onChange={this.handleCommentChange}/>
                                 <label htmlFor="first_name">Comment</label>
                             </div>
                             {/*<div className="input-field col s3">*/}
@@ -73,7 +79,8 @@ class HikeCommentForm extends React.Component {
                             </button>
                         </div>
                     </form>
-                </div>
+                {/*</div>*/}
+
             </div>
         );
     }

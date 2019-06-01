@@ -7,73 +7,33 @@ class HikeDetail extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
-        console.log(`HikeDetail state = %o`, this.state);
-        console.log(`HikeDetail this.props = %o`, this.props);
+        this.state = { hike: this.props.hike };
     }
 
-    // function NumberList(props) {
-    //     const numbers = props.numbers;
-    //     const listItems = numbers.map((number) =>
-    //         <li>{number}</li>
-    //     );
-    //     return (
-    //         <ul>{listItems}</ul>
-    //     );
-    // }
-
-    // renderComments = function(props) {
-    //
-    //      const commentsList = props.hike.comments.map( comment => { <li>{comment}</li> });
-    //
-    //     return (
-    //         <div>
-    //         <h4>Comments:</h4>
-    //         <ul>{commentsList}</ul>
-    //         </div>
-    //     );
-    // }
-
-
-
-
-
-
-
-    renderWeather() {
-        // let renderIt;
-        if(this.props.hike.conditionStatus) {
-            // renderIt = <img src="./public/images/rainy.png"></img>
-            return (
-                <div>
-                    <h4>Conditions:</h4>
-                    <p>{this.props.hike.conditionStatus + " " + this.props.hike.conditionDetails}</p>
-                    <i className="far fa-sun"></i>
-
-
-                </div>
-            )
-            // return <p>props has a condition status</p>;
-        }
-        // renderIt += <div>difficulty: {this.props.difficulty}</div>
-
-        return (
-            <p>props has no condition status</p>
-        )
+    componentDidMount() {
+        console.log(`HikeDetail component did mount state = %o`, this.state);
+        console.log(`HikeDetail component did mount this.props = %o`, this.props);
     }
+
+    onNewComment = function(hike) {
+        console.log(`in HikeDetail onNewComment hike = %o`, hike);
+        this.setState({hike: hike});
+    }.bind(this);
+
 
     render() {
+        console.log(`rendering HikeDetail`);
         return (
             <div>
                 <h3>{this.props.hike.name}</h3>
                 {/*<p><b>Summary:</b> {this.props.hike.summary}</p>*/}
                 {/*<p><b>Length:</b> {this.props.hike.length}</p>*/}
 
-                <li>Location: {this.props.hike.location}</li>
-                <li >Difficulty: {this.props.hike.difficulty}</li>
-                <li >Length: {this.props.hike.length} miles</li>
-                <li >Ascent: {this.props.hike.ascent} feet</li>
-                <li >Stars: {this.props.hike.stars}</li>
+                <p><b>Location:</b> {this.props.hike.location}</p>
+                <p><b>Difficulty:</b> {this.props.hike.difficulty}</p>
+                <p><b>Length:</b> {this.props.hike.length} miles</p>
+                <p><b>Ascent:</b> {this.props.hike.ascent} feet</p>
+                <p><b>Stars:</b> {this.props.hike.stars}</p>
                 <HikeComments comments={this.props.hike.comments} />
                 <HikeCommentForm hikeId={this.props.hike._id}/>
             </div>
